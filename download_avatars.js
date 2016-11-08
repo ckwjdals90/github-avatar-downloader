@@ -21,10 +21,16 @@ function getRepoContributors(repoOwner, repoName, cb) {
   }
 
   request(authenticateURL(requestURL), (error, response, body) => {
-    console.log('Response Status Code: ', response.statusCode);
-    console.log('Response Message: ', response.statusMessage);
-    console.log('Response Content Type: ', response.headers['content-type']);
-  })
+    var results = JSON.parse(body);
+    results.forEach(function(result) {
+      console.log(result.avatar_url);
+    })
+    // console.log('Response Status Code: ', response.statusCode);
+    // console.log('Response Message: ', response.statusMessage);
+    // console.log('Response Content Type: ', response.headers['content-type']);
+  });
+
+  // console.log(bodyInJSON);
 
 }
 getRepoContributors("jquery", "jquery", (err, result) => {
