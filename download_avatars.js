@@ -22,31 +22,28 @@ function getRepoContributors(repoOwner, repoName, cb) {
 
   request(authenticateURL(requestURL), (error, response, body) => {
     var results = JSON.parse(body);
-    results.forEach(function(result) {
+
+    const avatarURLArray = results.forEach(function(result) {
       console.log(result.avatar_url);
     })
-    // console.log('Response Status Code: ', response.statusCode);
-    // console.log('Response Message: ', response.statusMessage);
-    // console.log('Response Content Type: ', response.headers['content-type']);
+    return avatarURLArray;
   });
 
-  // console.log(bodyInJSON);
-
 }
-getRepoContributors("jquery", "jquery", (err, result) => {
-  console.log("Errors:", err);
-  console.log("Result:", result);
-})
 
-// var requestOptions = request('https://api.github.com/repos/jquery/jquery/contributors').on('response', (response) => {
 
-//   console.log('Response Status Code: ', response.statusCode);
-//   console.log('Response Message: ', response.statusMessage);
-//   console.log('Response Content Type: ', response.headers['content-type']);
-
+// getRepoContributors("jquery", "jquery", (err, result) => {
+//   console.log("Errors:", err);
+//   console.log("Result:", result);
 // })
 
-// console.log(requestOptions);
 
+function downloadImageByURL(url, filePath) {
+
+  request(url).pipe(fs.createWriteStream('./' + filePath));
+
+}
+
+downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "avatars/kvirani.jpg")
 
 
